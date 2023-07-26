@@ -7,9 +7,9 @@
 
 class Game {
   cosntructor(p1, p2, height= 6, width= 7){
-    this.players = [p1,p2];
-    this.height= height;
-    this.width= width;
+    this.players = [p1, p2];
+    this.height = height;
+    this.width = width;
     this.currPlayer = p1;
     this.makeBoard();
     this.makeHtmlBoard();
@@ -31,7 +31,7 @@ class Game {
 
  makeHtmlBoard() {
   const board = document.getElementById('board');
-  board.innerHTML = ""
+  board.innerHTML = " ";
 
   // make column tops (clickable area for adding a piece to that column)
   const top = document.createElement('tr');
@@ -93,7 +93,7 @@ class Game {
  endGame(msg) {
   alert(msg);
   const top = document.querySelector("#column-top");
-  top.removeEventListener("click",this.handleGameClick);
+  top.removeEventListener("click", this.handleGameClick);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -124,7 +124,7 @@ class Game {
   }
     
   // switch players
-  this.currPlayer = this.currPlayer === this.players[0]?this.players[1] : this.players [0];
+  this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players [0];
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -137,7 +137,7 @@ class Game {
       y < this.height &&
       x>= 0 &&
       x < this.width &&
-      this.board [y][x] ==== this.currPlayer
+      this.board [y][x] === this.currPlayer
     );
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
@@ -156,7 +156,7 @@ class Game {
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
-      }
+        }
       }
     }
   }
@@ -166,3 +166,9 @@ class Player{
     this.color = color;
   }
 }
+
+document.getElementById('startGame').addEventListener('click', () => {
+  let p1= new Player(document.getElementById('p1Color').value);
+  let p2= new Player(document.getElementById('p2Color').value);
+  new Game (p1, p2);
+});
